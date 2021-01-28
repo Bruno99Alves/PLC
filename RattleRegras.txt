@@ -1,0 +1,43 @@
+Rattle
+
+Declaração:
+var x;
+
+Atribuição:
+x -> 6;
+y -> 5+9;
+z -> 10-x;
+
+Operações:
+x+y;
+x-y;
+x*y;
+x/y;
+...(aplicar regras das contas)
+
+Comparações
+x=y;
+x<y; x>y;
+x<=y; x>=y;
+
+Ler Input:
+input(var);
+
+Escrever Output:
+output(var);
+
+Condicionais:
+if(5 <=4){....}
+
+For:
+for(x -> 0|5>4|x++)do{...}
+
+Definir Programas:
+def exemplo(x){...}
+
+Invocar Programa:
+
+
+Exemplo programa:
+def quadrado(a,b,c,d){if(a=b){if(a=c){if(a=d){output(1);}}}
+
