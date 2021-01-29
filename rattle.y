@@ -111,7 +111,7 @@ For   : FOR '(' ID '|' Cond ')' DO '{' Cmds '}'                  { asprintf(&$$,
       ;
 
 Inp   : INPUT '(' ID ')' ';'                                    { asprintf(&$$,"read\natoi\nstoreg %d\n",getPos($3)); }
-      | INPUT '(' ID '[' Expr ']' ')' ';'                       { asprintf(&$$,"read\natoi\nstoreg %d\n",getPos($3)+$5); }
+      | INPUT '(' ID '[' Expr ']' ')' ';'                       { asprintf(&$$,"read\natoi\npushgp\npushi %d\n%sadd\nstoren\n",getPos($3),$5); }
       ;
 
 Out   : OUTPUT '(' Expr ')' ';'                                 { asprintf(&$$,"%swritei\n",$3); }
