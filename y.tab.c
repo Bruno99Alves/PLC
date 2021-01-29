@@ -1574,7 +1574,7 @@ yyreduce:
 
   case 20:
 #line 110 "rattle.y"
-                                                                 { asprintf(&(yyval.valS), "for%d:\n%s%sjz enfor%d\n%sjump for%d\nendfor%d:\n",fors,(yyvsp[-7].valS),(yyvsp[-5].valS),fors,(yyvsp[-1].valS),fors,fors);fors++;}
+                                                                 { asprintf(&(yyval.valS), "%sfor%d:\n%sjz enfor%d\n%sjump for%d\nendfor%d:\n",(yyvsp[-7].valS),fors,(yyvsp[-5].valS),fors,(yyvsp[-1].valS),fors,fors);fors++;}
 #line 1579 "y.tab.c"
     break;
 
@@ -1586,7 +1586,7 @@ yyreduce:
 
   case 22:
 #line 114 "rattle.y"
-                                                                { asprintf(&(yyval.valS),"read\natoi\npushgp\npushi %d\n%sadd\nstoren\n",getPos((yyvsp[-5].valS)),(yyvsp[-3].valS)); }
+                                                                { asprintf(&(yyval.valS),"pushgp\npushi %d\n%sadd\nread\natoi\nstoren\n",getPos((yyvsp[-5].valS)),(yyvsp[-3].valS)); }
 #line 1591 "y.tab.c"
     break;
 
