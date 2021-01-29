@@ -19,6 +19,7 @@
 [\=\(\)\{\}\;\+\-\*\/\|\%\[\]]  { return yytext[0]; }
 [a-zA-Z][0-9a-zA-Z]*        { yylval.valS=strdup(yytext); return(ID); }
 [0-9]+                      { yylval.valN=atoi(yytext); return(NUM); } 
+\/\/.*\n                    { ; }
 [ \t\n]                     { ; }
 .                           { printf("Ficheiro Rattle contém caracter inválido [%c]\n", yytext[0]); }
 %%

@@ -70,7 +70,7 @@ int getPos(char* id){
 %token FOR DO
 %token INPUT
 %token OUTPUT
-%token EQ NE LT LE GT GE
+%token EQ NE LT LE GT GE AND OR
 %token TRUE FALSE
 %type  <valS> Decls Decl Cmds Rat Atrib If For Inp Out Cond Expr Fator
 
@@ -83,8 +83,8 @@ Decls : Decls Decl                                              { asprintf(&$$,"
       | Decl                                                    { asprintf(&$$,"%s",$1); }
       ;
 
-Decl  : VAR ID ';'                                              { asprintf(&$$,"pushi 0\n"); createVar($2); } 
-      | VAR ID '[' NUM ']' ';'                                  { asprintf(&$$,"pushn %d\n",$4); createArray($2,$4); } 
+Decl  : VAR ID                                                  { asprintf(&$$,"pushi 0\n"); createVar($2); } 
+      | VAR ID '[' NUM ']'                                      { asprintf(&$$,"pushn %d\n",$4); createArray($2,$4); } 
       ;
 
 Cmds  : Cmds Rat                                                { asprintf(&$$,"%s%s",$1,$2); }
@@ -98,23 +98,23 @@ Rat   : Atrib                                                   { asprintf(&$$,"
       | Out                                                     { asprintf(&$$,"%s",$1); }
       ;
 
-Atrib : ID '=' Expr ';'                                         { asprintf(&$$,"%sstoreg %d\n",$3,getPos($1)); }
-      | ID '[' Expr ']' '=' Expr ';'                            { asprintf(&$$,"pushgp\npushi %d\n%sadd\n%sstoren\n",getPos($1),$3,$6); }
+Atrib : ID '=' Expr                                             { asprintf(&$$,"%sstoreg %d\n",$3,getPos($1)); }
+      | ID '[' Expr ']' '=' Expr                                { asprintf(&$$,"pushgp\npushi %d\n%sadd\n%sstoren\n",getPos($1),$3,$6); }
       ;                  
       
 If    : IF '(' Cond ')' '{' Cmds '}'                            { asprintf(&$$,"%sjz spot%d\n%sspot%d:\n",$3,spot,$6,spot); spot++; }
       | IF '(' Cond ')' '{' Cmds '}' ELSE '{' Cmds '}'          { asprintf(&$$,"%sjz spot%d\n%sjump spot%d\nspot%d:\n%sspot%d:\n",$3,spot,$6,spot+1,spot,$10,spot+1); spot++; spot++; }
       ;
 
-For   : FOR '(' ID '|' Cond ')' DO '{' Cmds '}'                  { asprintf(&$$, "for%d:\n%sjz endfor%d\n%sjump for%d\nendfor%d:\n",fors,$5,fors,$9,fors,fors); fors++;}
-      | FOR '(' Atrib '|' Cond ')' DO '{' Cmds '}'               { asprintf(&$$, "%sfor%d:\n%sjz enfor%d\n%sjump for%d\nendfor%d:\n",$3,fors,$5,fors,$9,fors,fors);fors++;}
+For   : FOR '(' ID '|' Cond ')' DO '{' Cmds '}'                 { asprintf(&$$, "for%d:\n%sjz endfor%d\n%sjump for%d\nendfor%d:\n",fors,$5,fors,$9,fors,fors); fors++;}
+      | FOR '(' Atrib '|' Cond ')' DO '{' Cmds '}'              { asprintf(&$$, "%sfor%d:\n%sjz enfor%d\n%sjump for%d\nendfor%d:\n",$3,fors,$5,fors,$9,fors,fors);fors++;}
       ;
 
-Inp   : INPUT '(' ID ')' ';'                                    { asprintf(&$$,"read\natoi\nstoreg %d\n",getPos($3)); }
-      | INPUT '(' ID '[' Expr ']' ')' ';'                       { asprintf(&$$,"pushgp\npushi %d\n%sadd\nread\natoi\nstoren\n",getPos($3),$5); }
+Inp   : INPUT '(' ID ')'                                        { asprintf(&$$,"read\natoi\nstoreg %d\n",getPos($3)); }
+      | INPUT '(' ID '[' Expr ']' ')'                           { asprintf(&$$,"pushgp\npushi %d\n%sadd\nread\natoi\nstoren\n",getPos($3),$5); }
       ;
 
-Out   : OUTPUT '(' Expr ')' ';'                                 { asprintf(&$$,"%swritei\n",$3); }
+Out   : OUTPUT '(' Expr ')'                                     { asprintf(&$$,"%swritei\n",$3); }
       ;
 
 Cond  : Expr EQ Expr                                            { asprintf(&$$,"%s%sequal\n", $1, $3); }
