@@ -1,0 +1,23 @@
+//Quadrado
+
+var v[4]
+var c
+var r
+
+for(c=0|c<4)do{
+    input(v[c])
+    c = c+1
+}
+
+r = 1
+
+for(c=1|c<4)do{
+    if(v[0]==v[c]){
+        c = c+1
+    }else{
+        c = 4
+        r = 0
+    }
+}
+
+output(r)

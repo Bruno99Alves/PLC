@@ -107,7 +107,7 @@ If    : IF '(' Cond ')' '{' Cmds '}'                            { asprintf(&$$,"
       ;
 
 For   : FOR '(' ID '|' Cond ')' DO '{' Cmds '}'                 { asprintf(&$$, "for%d:\n%sjz endfor%d\n%sjump for%d\nendfor%d:\n",fors,$5,fors,$9,fors,fors); fors++;}
-      | FOR '(' Atrib '|' Cond ')' DO '{' Cmds '}'              { asprintf(&$$, "%sfor%d:\n%sjz enfor%d\n%sjump for%d\nendfor%d:\n",$3,fors,$5,fors,$9,fors,fors);fors++;}
+      | FOR '(' Atrib '|' Cond ')' DO '{' Cmds '}'              { asprintf(&$$, "%sfor%d:\n%sjz endfor%d\n%sjump for%d\nendfor%d:\n",$3,fors,$5,fors,$9,fors,fors);fors++;}
       ;
 
 Inp   : INPUT '(' ID ')'                                        { asprintf(&$$,"read\natoi\nstoreg %d\n",getPos($3)); }
