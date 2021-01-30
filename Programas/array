@@ -1,0 +1,12 @@
+//Array Inverso
+//com N fixo porque nao conseguimos fazer declaração apos outro comando que nao uma declaração
+var a[5]
+var i 
+for(i=0|i<5)do{
+    input(a[i])
+    i = i+1
+}
+for(i=4|i>=0)do{
+    output(a[i])
+    i = i-1
+}

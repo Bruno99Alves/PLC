@@ -1,0 +1,43 @@
+pushn 5
+pushi 0
+start
+pushi 0
+storeg 5
+for0:
+pushg 5
+pushi 5
+inf
+jz endfor0
+pushgp
+pushi 0
+pushg 5
+add
+read
+atoi
+storen
+pushg 5
+pushi 1
+add
+storeg 5
+jump for0
+endfor0:
+pushi 4
+storeg 5
+for1:
+pushg 5
+pushi 0
+supeq
+jz endfor1
+pushgp
+pushi 0
+pushg 5
+add
+loadn
+writei
+pushg 5
+pushi 1
+sub
+storeg 5
+jump for1
+endfor1:
+stop
