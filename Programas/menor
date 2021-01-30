@@ -1,0 +1,12 @@
+//Menor
+var n
+var menor 
+var i
+input(n)
+input(menor)
+for(n=n-1|n>0)do{
+    input(i)
+    if(i<menor){menor=i}
+    n = n-1
+}
+output(menor)

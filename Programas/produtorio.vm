@@ -1,0 +1,35 @@
+pushi 0
+pushi 0
+pushi 0
+start
+read
+atoi
+storeg 0
+read
+atoi
+storeg 1
+pushg 0
+pushi 1
+sub
+storeg 0
+for0:
+pushg 0
+pushi 0
+sup
+jz endfor0
+read
+atoi
+storeg 2
+pushg 1
+pushg 2
+mul
+storeg 1
+pushg 0
+pushi 1
+sub
+storeg 0
+jump for0
+endfor0:
+pushg 1
+writei
+stop
