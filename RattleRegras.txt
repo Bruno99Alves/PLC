@@ -1,43 +1,37 @@
 Rattle
 
 Declaração:
-var x;
+var x
 
 Atribuição:
-x -> 6;
-y -> 5+9;
-z -> 10-x;
+x = 6
 
 Operações:
-x+y;
-x-y;
-x*y;
-x/y;
-...(aplicar regras das contas)
+x+y	x-y
+x*y	x/y	x%y
 
 Comparações
-x=y;
-x<y; x>y;
-x<=y; x>=y;
+x==y	x!=y	x<y  
+x>y 	x<=y	x>=y;
 
 Ler Input:
-input(var);
+input(var)
 
 Escrever Output:
-output(var);
+output(var)
 
 Condicionais:
 if(5 <=4){....}
 
 For:
-for(x -> 0|5>4|x++)do{...}
+for(x|5>4)do{...}
+for(x = 0|5>4)do{...}
 
-Definir Programas:
-def exemplo(x){...}
+Comentário
+//...
 
-Invocar Programa:
+Declaração Array de tamanho N
+var x[N]
 
-
-Exemplo programa:
-def quadrado(a,b,c,d){if(a=b){if(a=c){if(a=d){output(1);}}}
-
+Acesso Array 
+x[a]
