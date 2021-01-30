@@ -1,0 +1,29 @@
+pushi 0
+pushi 0
+start
+pushi 0
+storeg 1
+for0:
+pushg 1
+pushi 0
+supeq
+jz endfor0
+read
+atoi
+storeg 1
+pushg 1
+pushi 2
+mod
+pushi 1
+equal
+jz spot0
+pushg 0
+pushi 1
+add
+storeg 0
+spot0:
+jump for0
+endfor0:
+pushg 0
+writei
+stop
