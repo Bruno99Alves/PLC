@@ -85,6 +85,7 @@ Decls : Decls Decl                                              { asprintf(&$$,"
 
 Decl  : VAR ID                                                  { asprintf(&$$,"pushi 0\n"); createVar($2); } 
       | VAR ID '[' NUM ']'                                      { asprintf(&$$,"pushn %d\n",$4); createArray($2,$4); } 
+      | VAR ID '[' NUM ']' '[' NUM ']'                          { asprintf(&$$,"pushn %d\n",$4*$7); createArray($2,$4*$7); } 
       ;
 
 Cmds  : Cmds Rat                                                { asprintf(&$$,"%s%s",$1,$2); }
@@ -100,6 +101,7 @@ Rat   : Atrib                                                   { asprintf(&$$,"
 
 Atrib : ID '=' Expr                                             { asprintf(&$$,"%sstoreg %d\n",$3,getPos($1)); }
       | ID '[' Expr ']' '=' Expr                                { asprintf(&$$,"pushgp\npushi %d\n%sadd\n%sstoren\n",getPos($1),$3,$6); }
+      | ID '[' Expr ']' '[' Expr ']' '=' Expr                   { asprintf(&$$,"pushgp\npushi %d\n%sadd\n%sstoren\n",getPos($1),$3,$9); }
       ;                  
       
 If    : IF '(' Cond ')' '{' Cmds '}'                            { asprintf(&$$,"%sjz spot%d\n%sspot%d:\n",$3,spot,$6,spot); spot++; }
