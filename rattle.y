@@ -16,7 +16,15 @@ typedef struct variable{
       int posStack;
 } *Variable;
 
-Variable v[MAX] = {0};              
+Variable v[MAX] = {0};      
+
+
+//Para A[M][N], A[x][y] = A[x+(y*M)] se M >= N  e   A[x][y] = A[(x*N)+y] se M < N
+typedef struct arrayBid{          
+      char* id;
+      int m;      //tamanho da maior dimensao do array
+      int p;      //posiçao da maior dimensao do array (0 se M e 1 se N)
+} *ArrayBid;
 
 
 void createVar (char* id){          
@@ -30,20 +38,28 @@ void createVar (char* id){
       gp++;
 }
 
-void createArray(char* id, int N){
+
+void createArray(char* id, int N, int M){
       Variable variavel = (Variable)malloc(sizeof(struct variable));
       variavel->id = id;
-      variavel->posStack = gp;
+      variavel->posStack = gp;    
+      int i;
+      if(M==0){ 
+            i = gp + N;
+      }else{
+            i = gp + (N*M);
+      }
       if(gp>=MAX){            
             erro = 1;
-        }
-      int i=gp+N;
+      }
       while(gp<i){
             v[gp]=variavel;
             gp++;
       }
 }
-int inArray(char* id){           
+
+
+int inArray(char* id){              //procura na lista v
       int i;
       for(i=0; i<MAX; i++){
             if(strcmp(v[i]->id,id)==0){
@@ -53,11 +69,29 @@ int inArray(char* id){
       return 0;
 }
 
-int getPos(char* id){            
+
+int getPos(char* id){            //retorna posiçao na stack da var id
       int i;
       for(i=0; i<MAX; i++){
             if(strcmp(v[i]->id,id)==0){ return v[i]->posStack; }
       }
+}
+
+
+void auxBid (char *id, int x, int y){
+      int maior;
+      int posiçao;
+      if(x>=y){
+            maior = x;
+            posiçao = 0;
+      }else{
+            maior = y;
+            posicao = 1;
+      }
+      ArrayBid arrayBid = (ArrayBid)malloc(sizeof(struct arrayBid));
+      arrayBid->id = id;
+      arrayBid->m = maior;
+      arrayBid->p = posicao;
 }
 
 %}
@@ -85,7 +119,7 @@ Decls : Decls Decl                                              { asprintf(&$$,"
 
 Decl  : VAR ID                                                  { asprintf(&$$,"pushi 0\n"); createVar($2); } 
       | VAR ID '[' NUM ']'                                      { asprintf(&$$,"pushn %d\n",$4); createArray($2,$4); } 
-      | VAR ID '[' NUM ']' '[' NUM ']'                          { asprintf(&$$,"pushn %d\n",$4*$7); createArray($2,$4*$7); } 
+      | VAR ID '[' NUM ']' '[' NUM ']'                          { asprintf(&$$,"pushn %d\n",$4*$7); createArray($2,$4*$7); auxBid($2,$4,$7); } 
       ;
 
 Cmds  : Cmds Rat                                                { asprintf(&$$,"%s%s",$1,$2); }
