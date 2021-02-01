@@ -80,10 +80,10 @@ int getPos(char* id){            //retorna posiçao na stack da var id
 
 void auxBid (char *id, int x, int y){
       int maior;
-      int posiçao;
+      int posicao;
       if(x>=y){
             maior = x;
-            posiçao = 0;
+            posicao = 0;
       }else{
             maior = y;
             posicao = 1;
@@ -118,8 +118,8 @@ Decls : Decls Decl                                              { asprintf(&$$,"
       ;
 
 Decl  : VAR ID                                                  { asprintf(&$$,"pushi 0\n"); createVar($2); } 
-      | VAR ID '[' NUM ']'                                      { asprintf(&$$,"pushn %d\n",$4); createArray($2,$4); } 
-      | VAR ID '[' NUM ']' '[' NUM ']'                          { asprintf(&$$,"pushn %d\n",$4*$7); createArray($2,$4*$7); auxBid($2,$4,$7); } 
+      | VAR ID '[' NUM ']'                                      { asprintf(&$$,"pushn %d\n",$4); createArray($2,$4,0); } 
+      | VAR ID '[' NUM ']' '[' NUM ']'                          { asprintf(&$$,"pushn %d\n",$4*$7); createArray($2,$4,$7); auxBid($2,$4,$7); } 
       ;
 
 Cmds  : Cmds Rat                                                { asprintf(&$$,"%s%s",$1,$2); }
