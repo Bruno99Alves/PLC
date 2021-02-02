@@ -161,10 +161,11 @@ void auxBid (char *id, int x, int y){
       arrayBid->id = id;
       arrayBid->m = maior;
       arrayBid->p = posicao;
+      printf("%s\nmaior:%d\npos:%d\n",arrayBid->id,arrayBid->m,arrayBid->p);
 }
 
 
-#line 168 "y.tab.c"
+#line 169 "y.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -258,10 +259,10 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 99 "rattle.y"
+#line 100 "rattle.y"
  int valN; char* valS; 
 
-#line 265 "y.tab.c"
+#line 266 "y.tab.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -638,11 +639,11 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,   112,   112,   113,   116,   117,   120,   121,   122,   125,
-     126,   129,   130,   131,   132,   133,   136,   137,   138,   141,
-     142,   145,   146,   149,   150,   153,   156,   157,   158,   159,
-     160,   161,   164,   165,   166,   167,   168,   169,   172,   173,
-     174,   175,   176,   177
+       0,   113,   113,   114,   117,   118,   121,   122,   123,   126,
+     127,   130,   131,   132,   133,   134,   137,   138,   139,   142,
+     143,   146,   147,   150,   151,   154,   157,   158,   159,   160,
+     161,   162,   165,   166,   167,   168,   169,   170,   173,   174,
+     175,   176,   177,   178
 };
 #endif
 
@@ -1504,253 +1505,253 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 112 "rattle.y"
+#line 113 "rattle.y"
                                                                 { printf("%sstart\n%sstop\n",(yyvsp[-1].valS),(yyvsp[0].valS)); }
-#line 1510 "y.tab.c"
+#line 1511 "y.tab.c"
     break;
 
   case 3:
-#line 113 "rattle.y"
+#line 114 "rattle.y"
                                                                 { printf("start\n%sstop\n",(yyvsp[0].valS)); }
-#line 1516 "y.tab.c"
+#line 1517 "y.tab.c"
     break;
 
   case 4:
-#line 116 "rattle.y"
+#line 117 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"%s%s",(yyvsp[-1].valS),(yyvsp[0].valS)); }
-#line 1522 "y.tab.c"
+#line 1523 "y.tab.c"
     break;
 
   case 5:
-#line 117 "rattle.y"
+#line 118 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"%s",(yyvsp[0].valS)); }
-#line 1528 "y.tab.c"
+#line 1529 "y.tab.c"
     break;
 
   case 6:
-#line 120 "rattle.y"
+#line 121 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"pushi 0\n"); createVar((yyvsp[0].valS)); }
-#line 1534 "y.tab.c"
+#line 1535 "y.tab.c"
     break;
 
   case 7:
-#line 121 "rattle.y"
+#line 122 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"pushn %d\n",(yyvsp[-1].valN)); createArray((yyvsp[-3].valS),(yyvsp[-1].valN),0); }
-#line 1540 "y.tab.c"
+#line 1541 "y.tab.c"
     break;
 
   case 8:
-#line 122 "rattle.y"
+#line 123 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"pushn %d\n",(yyvsp[-4].valN)*(yyvsp[-1].valN)); createArray((yyvsp[-6].valS),(yyvsp[-4].valN),(yyvsp[-1].valN)); auxBid((yyvsp[-6].valS),(yyvsp[-4].valN),(yyvsp[-1].valN)); }
-#line 1546 "y.tab.c"
+#line 1547 "y.tab.c"
     break;
 
   case 9:
-#line 125 "rattle.y"
+#line 126 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"%s%s",(yyvsp[-1].valS),(yyvsp[0].valS)); }
-#line 1552 "y.tab.c"
+#line 1553 "y.tab.c"
     break;
 
   case 10:
-#line 126 "rattle.y"
+#line 127 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"%s",(yyvsp[0].valS)); }
-#line 1558 "y.tab.c"
+#line 1559 "y.tab.c"
     break;
 
   case 11:
-#line 129 "rattle.y"
+#line 130 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"%s",(yyvsp[0].valS)); }
-#line 1564 "y.tab.c"
+#line 1565 "y.tab.c"
     break;
 
   case 12:
-#line 130 "rattle.y"
+#line 131 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"%s",(yyvsp[0].valS)); }
-#line 1570 "y.tab.c"
+#line 1571 "y.tab.c"
     break;
 
   case 13:
-#line 131 "rattle.y"
+#line 132 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"%s",(yyvsp[0].valS)); }
-#line 1576 "y.tab.c"
+#line 1577 "y.tab.c"
     break;
 
   case 14:
-#line 132 "rattle.y"
+#line 133 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"%s",(yyvsp[0].valS)); }
-#line 1582 "y.tab.c"
+#line 1583 "y.tab.c"
     break;
 
   case 15:
-#line 133 "rattle.y"
+#line 134 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"%s",(yyvsp[0].valS)); }
-#line 1588 "y.tab.c"
+#line 1589 "y.tab.c"
     break;
 
   case 16:
-#line 136 "rattle.y"
+#line 137 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"%sstoreg %d\n",(yyvsp[0].valS),getPos((yyvsp[-2].valS))); }
-#line 1594 "y.tab.c"
+#line 1595 "y.tab.c"
     break;
 
   case 17:
-#line 137 "rattle.y"
+#line 138 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"pushgp\npushi %d\n%sadd\n%sstoren\n",getPos((yyvsp[-5].valS)),(yyvsp[-3].valS),(yyvsp[0].valS)); }
-#line 1600 "y.tab.c"
+#line 1601 "y.tab.c"
     break;
 
   case 18:
-#line 138 "rattle.y"
+#line 139 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"pushgp\npushi %d\n%sadd\n%sstoren\n",getPos((yyvsp[-8].valS)),(yyvsp[-6].valS),(yyvsp[0].valS)); }
-#line 1606 "y.tab.c"
+#line 1607 "y.tab.c"
     break;
 
   case 19:
-#line 141 "rattle.y"
+#line 142 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"%sjz spot%d\n%sspot%d:\n",(yyvsp[-4].valS),spot,(yyvsp[-1].valS),spot); spot++; }
-#line 1612 "y.tab.c"
+#line 1613 "y.tab.c"
     break;
 
   case 20:
-#line 142 "rattle.y"
+#line 143 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"%sjz spot%d\n%sjump spot%d\nspot%d:\n%sspot%d:\n",(yyvsp[-8].valS),spot,(yyvsp[-5].valS),spot+1,spot,(yyvsp[-1].valS),spot+1); spot++; spot++; }
-#line 1618 "y.tab.c"
+#line 1619 "y.tab.c"
     break;
 
   case 21:
-#line 145 "rattle.y"
+#line 146 "rattle.y"
                                                                 { asprintf(&(yyval.valS), "for%d:\n%sjz endfor%d\n%sjump for%d\nendfor%d:\n",fors,(yyvsp[-5].valS),fors,(yyvsp[-1].valS),fors,fors); fors++;}
-#line 1624 "y.tab.c"
+#line 1625 "y.tab.c"
     break;
 
   case 22:
-#line 146 "rattle.y"
+#line 147 "rattle.y"
                                                                 { asprintf(&(yyval.valS), "%sfor%d:\n%sjz endfor%d\n%sjump for%d\nendfor%d:\n",(yyvsp[-7].valS),fors,(yyvsp[-5].valS),fors,(yyvsp[-1].valS),fors,fors);fors++;}
-#line 1630 "y.tab.c"
+#line 1631 "y.tab.c"
     break;
 
   case 23:
-#line 149 "rattle.y"
+#line 150 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"read\natoi\nstoreg %d\n",getPos((yyvsp[-1].valS))); }
-#line 1636 "y.tab.c"
+#line 1637 "y.tab.c"
     break;
 
   case 24:
-#line 150 "rattle.y"
+#line 151 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"pushgp\npushi %d\n%sadd\nread\natoi\nstoren\n",getPos((yyvsp[-4].valS)),(yyvsp[-2].valS)); }
-#line 1642 "y.tab.c"
+#line 1643 "y.tab.c"
     break;
 
   case 25:
-#line 153 "rattle.y"
+#line 154 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"%swritei\n",(yyvsp[-1].valS)); }
-#line 1648 "y.tab.c"
+#line 1649 "y.tab.c"
     break;
 
   case 26:
-#line 156 "rattle.y"
+#line 157 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"%s%sequal\n", (yyvsp[-2].valS), (yyvsp[0].valS)); }
-#line 1654 "y.tab.c"
+#line 1655 "y.tab.c"
     break;
 
   case 27:
-#line 157 "rattle.y"
+#line 158 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"%s%sequal\nnot\n", (yyvsp[-2].valS), (yyvsp[0].valS)); }
-#line 1660 "y.tab.c"
+#line 1661 "y.tab.c"
     break;
 
   case 28:
-#line 158 "rattle.y"
+#line 159 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"%s%sinf\n", (yyvsp[-2].valS), (yyvsp[0].valS)); }
-#line 1666 "y.tab.c"
+#line 1667 "y.tab.c"
     break;
 
   case 29:
-#line 159 "rattle.y"
+#line 160 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"%s%sinfeq\n", (yyvsp[-2].valS), (yyvsp[0].valS)); }
-#line 1672 "y.tab.c"
+#line 1673 "y.tab.c"
     break;
 
   case 30:
-#line 160 "rattle.y"
+#line 161 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"%s%ssup\n", (yyvsp[-2].valS), (yyvsp[0].valS)); }
-#line 1678 "y.tab.c"
+#line 1679 "y.tab.c"
     break;
 
   case 31:
-#line 161 "rattle.y"
+#line 162 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"%s%ssupeq\n", (yyvsp[-2].valS), (yyvsp[0].valS)); }
-#line 1684 "y.tab.c"
+#line 1685 "y.tab.c"
     break;
 
   case 33:
-#line 165 "rattle.y"
+#line 166 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"%s%sadd\n",(yyvsp[-2].valS),(yyvsp[0].valS)); }
-#line 1690 "y.tab.c"
+#line 1691 "y.tab.c"
     break;
 
   case 34:
-#line 166 "rattle.y"
+#line 167 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"%s%ssub\n",(yyvsp[-2].valS),(yyvsp[0].valS)); }
-#line 1696 "y.tab.c"
+#line 1697 "y.tab.c"
     break;
 
   case 35:
-#line 167 "rattle.y"
+#line 168 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"%s%smul\n",(yyvsp[-2].valS),(yyvsp[0].valS)); }
-#line 1702 "y.tab.c"
+#line 1703 "y.tab.c"
     break;
 
   case 36:
-#line 168 "rattle.y"
+#line 169 "rattle.y"
                                                                 { if((yyvsp[0].valS)){ asprintf(&(yyval.valS),"%s%sdiv\n",(yyvsp[-2].valS),(yyvsp[0].valS)); }else{printf("Erro: Divisao por 0"); (yyval.valS)=0; erro=1;} }
-#line 1708 "y.tab.c"
+#line 1709 "y.tab.c"
     break;
 
   case 37:
-#line 169 "rattle.y"
+#line 170 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"%s%smod\n",(yyvsp[-2].valS),(yyvsp[0].valS)); }
-#line 1714 "y.tab.c"
+#line 1715 "y.tab.c"
     break;
 
   case 38:
-#line 172 "rattle.y"
+#line 173 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"pushi %d\n",(yyvsp[0].valN)); }
-#line 1720 "y.tab.c"
+#line 1721 "y.tab.c"
     break;
 
   case 39:
-#line 173 "rattle.y"
+#line 174 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"pushi %d\n",(-1)*(yyvsp[0].valN)); }
-#line 1726 "y.tab.c"
+#line 1727 "y.tab.c"
     break;
 
   case 40:
-#line 174 "rattle.y"
+#line 175 "rattle.y"
                                                                 { if(inArray((yyvsp[0].valS))==1){ asprintf(&(yyval.valS),"pushg %d\n",getPos((yyvsp[0].valS))); }else{printf("Erro: Variavel %s não existe",(yyvsp[0].valS)); (yyval.valS)=0; erro=1;} }
-#line 1732 "y.tab.c"
+#line 1733 "y.tab.c"
     break;
 
   case 41:
-#line 175 "rattle.y"
+#line 176 "rattle.y"
                                                                 { if(inArray((yyvsp[-3].valS))==1){ asprintf(&(yyval.valS),"pushgp\npushi %d\n%sadd\nloadn\n",getPos((yyvsp[-3].valS)),(yyvsp[-1].valS)); }else{printf("Erro: Array %s não existe",(yyvsp[-3].valS)); (yyval.valS)=0; erro=1;} }
-#line 1738 "y.tab.c"
+#line 1739 "y.tab.c"
     break;
 
   case 42:
-#line 176 "rattle.y"
+#line 177 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"pushi %d\n",1); }
-#line 1744 "y.tab.c"
+#line 1745 "y.tab.c"
     break;
 
   case 43:
-#line 177 "rattle.y"
+#line 178 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"pushi %d\n",0); }
-#line 1750 "y.tab.c"
+#line 1751 "y.tab.c"
     break;
 
 
-#line 1754 "y.tab.c"
+#line 1755 "y.tab.c"
 
       default: break;
     }
@@ -1982,7 +1983,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 181 "rattle.y"
+#line 182 "rattle.y"
 
 
 #include "lex.yy.c"

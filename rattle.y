@@ -92,6 +92,7 @@ void auxBid (char *id, int x, int y){
       arrayBid->id = id;
       arrayBid->m = maior;
       arrayBid->p = posicao;
+      printf("%s\nmaior:%d\npos:%d\n",arrayBid->id,arrayBid->m,arrayBid->p);
 }
 
 %}

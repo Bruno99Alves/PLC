@@ -95,7 +95,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 99 "rattle.y"
+#line 100 "rattle.y"
  int valN; char* valS; 
 
 #line 102 "y.tab.h"
