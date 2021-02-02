@@ -14,23 +14,17 @@ int gp = 0;                         //contador para gp
 typedef struct variable{          
       char* id;
       int posStack;
+      int nArray;
 } *Variable;
 
 Variable v[MAX] = {0};      
-
-
-//Para A[M][N], A[x][y] = A[x+(y*M)] se M >= N  e   A[x][y] = A[(x*N)+y] se M < N
-typedef struct arrayBid{          
-      char* id;
-      int m;      //tamanho da maior dimensao do array
-      int p;      //posiçao da maior dimensao do array (0 se M e 1 se N)
-} *ArrayBid;
 
 
 void createVar (char* id){          
       Variable variavel = (Variable)malloc(sizeof(struct variable));
       variavel->id = id;
       variavel->posStack = gp;
+      variavel->nArray = 0; 
       if(gp>=MAX){            
             erro = 1;
         }
@@ -42,7 +36,8 @@ void createVar (char* id){
 void createArray(char* id, int N, int M){
       Variable variavel = (Variable)malloc(sizeof(struct variable));
       variavel->id = id;
-      variavel->posStack = gp;    
+      variavel->posStack = gp;  
+      variavel->nArray = N;  
       int i;
       if(M==0){ 
             i = gp + N;
@@ -56,10 +51,9 @@ void createArray(char* id, int N, int M){
             v[gp]=variavel;
             gp++;
       }
-}
+} 
 
-
-int inArray(char* id){              //procura na lista v
+int inArray(char* id){              //procura na lista de variaveis v
       int i;
       for(i=0; i<MAX; i++){
             if(strcmp(v[i]->id,id)==0){
@@ -77,23 +71,13 @@ int getPos(char* id){            //retorna posiçao na stack da var id
       }
 }
 
-
-void auxBid (char *id, int x, int y){
-      int maior;
-      int posicao;
-      if(x>=y){
-            maior = x;
-            posicao = 0;
-      }else{
-            maior = y;
-            posicao = 1;
+int getN(char* id){     //retorna N de a[N] ou a[N][M]
+      int i;
+      for(i=0; i<MAX; i++){
+            if(strcmp(v[i]->id,id)==0){ return v[i]->nArray; }
       }
-      ArrayBid arrayBid = (ArrayBid)malloc(sizeof(struct arrayBid));
-      arrayBid->id = id;
-      arrayBid->m = maior;
-      arrayBid->p = posicao;
-      printf("%s\nmaior:%d\npos:%d\n",arrayBid->id,arrayBid->m,arrayBid->p);
 }
+
 
 %}
 
@@ -120,7 +104,7 @@ Decls : Decls Decl                                              { asprintf(&$$,"
 
 Decl  : VAR ID                                                  { asprintf(&$$,"pushi 0\n"); createVar($2); } 
       | VAR ID '[' NUM ']'                                      { asprintf(&$$,"pushn %d\n",$4); createArray($2,$4,0); } 
-      | VAR ID '[' NUM ']' '[' NUM ']'                          { asprintf(&$$,"pushn %d\n",$4*$7); createArray($2,$4,$7); auxBid($2,$4,$7); } 
+      | VAR ID '[' NUM ']' '[' NUM ']'                          { asprintf(&$$,"pushn %d\n",$4*$7); createArray($2,$4,$7); } 
       ;
 
 Cmds  : Cmds Rat                                                { asprintf(&$$,"%s%s",$1,$2); }
@@ -136,7 +120,7 @@ Rat   : Atrib                                                   { asprintf(&$$,"
 
 Atrib : ID '=' Expr                                             { asprintf(&$$,"%sstoreg %d\n",$3,getPos($1)); }
       | ID '[' Expr ']' '=' Expr                                { asprintf(&$$,"pushgp\npushi %d\n%sadd\n%sstoren\n",getPos($1),$3,$6); }
-      | ID '[' Expr ']' '[' Expr ']' '=' Expr                   { asprintf(&$$,"pushgp\npushi %d\n%sadd\n%sstoren\n",getPos($1),$3,$9); }
+      | ID '[' Expr ']' '[' Expr ']' '=' Expr                   { asprintf(&$$,"pushgp\npushi %d\n%sadd\n%sstoren\n",getPos($1),$3+($6*getN($1)),$9); }
       ;                  
       
 If    : IF '(' Cond ')' '{' Cmds '}'                            { asprintf(&$$,"%sjz spot%d\n%sspot%d:\n",$3,spot,$6,spot); spot++; }
@@ -174,6 +158,7 @@ Fator : NUM                                                     { asprintf(&$$,"
       | '-' NUM                                                 { asprintf(&$$,"pushi %d\n",(-1)*$2); }
       | ID                                                      { if(inArray($1)==1){ asprintf(&$$,"pushg %d\n",getPos($1)); }else{printf("Erro: Variavel %s não existe",$1); $$=0; erro=1;} }
       | ID '[' Expr ']'                                         { if(inArray($1)==1){ asprintf(&$$,"pushgp\npushi %d\n%sadd\nloadn\n",getPos($1),$3); }else{printf("Erro: Array %s não existe",$1); $$=0; erro=1;} }
+      | ID '[' Expr ']' '[' Expr ']'                            { if(inArray($1)==1){ asprintf(&$$,"pushgp\npushi %d\n%sadd\nloadn\n",getPos($1),$3+($6*getN($1))); }else{printf("Erro: Array %s não existe",$1); $$=0; erro=1;} }
       | TRUE                                                    { asprintf(&$$,"pushi %d\n",1); }
       | FALSE                                                   { asprintf(&$$,"pushi %d\n",0); }
       ;
