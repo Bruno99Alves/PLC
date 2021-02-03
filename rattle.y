@@ -89,9 +89,9 @@ int getN(char* id){     //retorna N de a[N] ou a[N][M]
 %token FOR DO
 %token INPUT
 %token OUTPUT
-%token EQ NE LT LE GT GE AND OR
+%token EQ NE LT LE GT GE 
 %token TRUE FALSE
-%type  <valS> Decls Decl Cmds Rat Atrib If For Inp Out Cond Expr Fator
+%type  <valS> Decls Decl Cmds Rat Atrib If For Inp Out Cond Expr Termo Fator
 
 %%
 Rattle: Decls Cmds                                              { printf("%sstart\n%sstop\n",$1,$2); }
@@ -146,13 +146,17 @@ Cond  : Expr EQ Expr                                            { asprintf(&$$,"
       | Expr GE Expr                                            { asprintf(&$$,"%s%ssupeq\n", $1, $3); }
       ;
 
-Expr  : Fator                                                                 
-      | Expr '+' Expr                                           { asprintf(&$$,"%s%sadd\n",$1,$3); }
-      | Expr '-' Expr                                           { asprintf(&$$,"%s%ssub\n",$1,$3); }
-      | Expr '*' Expr                                           { asprintf(&$$,"%s%smul\n",$1,$3); }
-      | Expr '/' Expr                                           { if($3){ asprintf(&$$,"%s%sdiv\n",$1,$3); }else{printf("Erro: Divisao por 0"); $$=0; erro=1;} }
-      | Expr '%' Expr                                           { asprintf(&$$,"%s%smod\n",$1,$3); }
+Expr  : Termo                                                   { asprintf(&$$,"%s",$1); }            
+      | Expr '+' Termo                                          { asprintf(&$$,"%s%sadd\n",$1,$3); }
+      | Expr '-' Termo                                          { asprintf(&$$,"%s%ssub\n",$1,$3); }
       ;
+
+Termo : Fator                                                   { asprintf(&$$,"%s",$1); }
+      | Expr '*' Fator                                          { asprintf(&$$,"%s%smul\n",$1,$3); }
+      | Expr '/' Fator                                          { if($3){ asprintf(&$$,"%s%sdiv\n",$1,$3); }else{printf("Erro: Divisao por 0"); $$=0; erro=1;} }                 
+      | Expr '%' Fator                                          { asprintf(&$$,"%s%smod\n",$1,$3); }
+      ;
+
          
 Fator : NUM                                                     { asprintf(&$$,"pushi %d\n",$1); }         
       | '-' NUM                                                 { asprintf(&$$,"pushi %d\n",(-1)*$2); }
@@ -161,6 +165,7 @@ Fator : NUM                                                     { asprintf(&$$,"
       | ID '[' Expr ']' '[' Expr ']'                            { if(inArray($1)==1){ asprintf(&$$,"pushgp\npushi %d\n%s%spushi %d\nmul\nadd\nsadd\nloadn\n",getPos($1),$3,$6,getN($1)); }else{printf("Erro: Array %s não existe",$1); $$=0; erro=1;} }
       | TRUE                                                    { asprintf(&$$,"pushi %d\n",1); }
       | FALSE                                                   { asprintf(&$$,"pushi %d\n",0); }
+      | '(' Expr ')'                                            { asprintf(&$$,"%s",$2); }
       ;
 
 
