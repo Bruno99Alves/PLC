@@ -1,1 +1,13 @@
-
+pushn 35
+start
+pushgp
+pushi 0
+pushi 2
+pushi 2
+pushi 7
+mul
+add
+add
+pushi 3
+storen
+stop
