@@ -64,10 +64,8 @@ extern int yydebug;
     LE = 270,
     GT = 271,
     GE = 272,
-    AND = 273,
-    OR = 274,
-    TRUE = 275,
-    FALSE = 276
+    TRUE = 273,
+    FALSE = 274
   };
 #endif
 /* Tokens.  */
@@ -86,10 +84,8 @@ extern int yydebug;
 #define LE 270
 #define GT 271
 #define GE 272
-#define AND 273
-#define OR 274
-#define TRUE 275
-#define FALSE 276
+#define TRUE 273
+#define FALSE 274
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -98,7 +94,7 @@ union YYSTYPE
 #line 84 "rattle.y"
  int valN; char* valS; 
 
-#line 102 "y.tab.h"
+#line 98 "y.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

@@ -1,13 +1,19 @@
-pushn 35
-start
-pushgp
 pushi 0
+start
+pushi 5
 pushi 2
+add
+pushi 7
+mul
+storeg 0
+pushg 0
+writei
 pushi 2
 pushi 7
 mul
+pushi 5
 add
-add
-pushi 3
-storen
+storeg 0
+pushg 0
+writei
 stop
