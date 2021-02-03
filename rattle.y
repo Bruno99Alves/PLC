@@ -158,7 +158,7 @@ Fator : NUM                                                     { asprintf(&$$,"
       | '-' NUM                                                 { asprintf(&$$,"pushi %d\n",(-1)*$2); }
       | ID                                                      { if(inArray($1)==1){ asprintf(&$$,"pushg %d\n",getPos($1)); }else{printf("Erro: Variavel %s não existe",$1); $$=0; erro=1;} }
       | ID '[' Expr ']'                                         { if(inArray($1)==1){ asprintf(&$$,"pushgp\npushi %d\n%sadd\nloadn\n",getPos($1),$3); }else{printf("Erro: Array %s não existe",$1); $$=0; erro=1;} }
-      | ID '[' Expr ']' '[' Expr ']'                            { if(inArray($1)==1){ asprintf(&$$,"pushgp\npushi %d\n%s%spushi %d\nmul\nadd\nloadn\n",getPos($1),$3,$6,getN($1)); }else{printf("Erro: Array %s não existe",$1); $$=0; erro=1;} }
+      | ID '[' Expr ']' '[' Expr ']'                            { if(inArray($1)==1){ asprintf(&$$,"pushgp\npushi %d\n%s%spushi %d\nmul\nadd\nsadd\nloadn\n",getPos($1),$3,$6,getN($1)); }else{printf("Erro: Array %s não existe",$1); $$=0; erro=1;} }
       | TRUE                                                    { asprintf(&$$,"pushi %d\n",1); }
       | FALSE                                                   { asprintf(&$$,"pushi %d\n",0); }
       ;
