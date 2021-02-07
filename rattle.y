@@ -81,9 +81,10 @@ int getN(char* id){     //retorna N de a[N] ou a[N][M]
 
 %}
 
-%union { int valN; char* valS; }
+%union { int valN; char* valS; float valF; }
 %token <valN>NUM
 %token <valS>ID 
+%token <valF>FLOAT
 %token VAR
 %token IF ELSE
 %token FOR DO
@@ -133,6 +134,7 @@ For   : FOR '(' ID '|' Cond ')' DO '{' Cmds '}'                 { asprintf(&$$, 
 
 Inp   : INPUT '(' ID ')'                                        { asprintf(&$$,"read\natoi\nstoreg %d\n",getPos($3)); }
       | INPUT '(' ID '[' Expr ']' ')'                           { asprintf(&$$,"pushgp\npushi %d\n%sadd\nread\natoi\nstoren\n",getPos($3),$5); }
+      | INPUT '(' ID '[' Expr ']' '[' Expr ']' ')'              { asprintf(&$$,"pushgp\npushi %d\n%s%spushi %d\nmul\nadd\nadd\nread\natoi\nstoren\n",getPos($1),$3,$6,getN($1)); }    
       ;
 
 Out   : OUTPUT '(' Expr ')'                                     { asprintf(&$$,"%swritei\n",$3); }
@@ -158,8 +160,7 @@ Termo : Fator                                                   { asprintf(&$$,"
       ;
 
          
-Fator : NUM                                                     { asprintf(&$$,"pushi %d\n",$1); }         
-      | '-' NUM                                                 { asprintf(&$$,"pushi %d\n",(-1)*$2); }
+Fator : NUM                                                     { asprintf(&$$,"pushi %d\n",$1); }               
       | ID                                                      { if(inArray($1)==1){ asprintf(&$$,"pushg %d\n",getPos($1)); }else{printf("Erro: Variavel %s não existe",$1); $$=0; erro=1;} }
       | ID '[' Expr ']'                                         { if(inArray($1)==1){ asprintf(&$$,"pushgp\npushi %d\n%sadd\nloadn\n",getPos($1),$3); }else{printf("Erro: Array %s não existe",$1); $$=0; erro=1;} }
       | ID '[' Expr ']' '[' Expr ']'                            { if(inArray($1)==1){ asprintf(&$$,"pushgp\npushi %d\n%s%spushi %d\nmul\nadd\nsadd\nloadn\n",getPos($1),$3,$6,getN($1)); }else{printf("Erro: Array %s não existe",$1); $$=0; erro=1;} }
@@ -167,7 +168,6 @@ Fator : NUM                                                     { asprintf(&$$,"
       | FALSE                                                   { asprintf(&$$,"pushi %d\n",0); }
       | '(' Expr ')'                                            { asprintf(&$$,"%s",$2); }
       ;
-
 
 %%
 
