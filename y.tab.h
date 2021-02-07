@@ -51,50 +51,52 @@ extern int yydebug;
   {
     NUM = 258,
     ID = 259,
-    VAR = 260,
-    IF = 261,
-    ELSE = 262,
-    FOR = 263,
-    DO = 264,
-    INPUT = 265,
-    OUTPUT = 266,
-    EQ = 267,
-    NE = 268,
-    LT = 269,
-    LE = 270,
-    GT = 271,
-    GE = 272,
-    TRUE = 273,
-    FALSE = 274
+    FLOAT = 260,
+    VAR = 261,
+    IF = 262,
+    ELSE = 263,
+    FOR = 264,
+    DO = 265,
+    INPUT = 266,
+    OUTPUT = 267,
+    EQ = 268,
+    NE = 269,
+    LT = 270,
+    LE = 271,
+    GT = 272,
+    GE = 273,
+    TRUE = 274,
+    FALSE = 275
   };
 #endif
 /* Tokens.  */
 #define NUM 258
 #define ID 259
-#define VAR 260
-#define IF 261
-#define ELSE 262
-#define FOR 263
-#define DO 264
-#define INPUT 265
-#define OUTPUT 266
-#define EQ 267
-#define NE 268
-#define LT 269
-#define LE 270
-#define GT 271
-#define GE 272
-#define TRUE 273
-#define FALSE 274
+#define FLOAT 260
+#define VAR 261
+#define IF 262
+#define ELSE 263
+#define FOR 264
+#define DO 265
+#define INPUT 266
+#define OUTPUT 267
+#define EQ 268
+#define NE 269
+#define LT 270
+#define LE 271
+#define GT 272
+#define GE 273
+#define TRUE 274
+#define FALSE 275
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 84 "rattle.y"
- int valN; char* valS; 
+#line 82 "rattle.y"
+ int valN; char* valS; float valF; 
 
-#line 98 "y.tab.h"
+#line 100 "y.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
