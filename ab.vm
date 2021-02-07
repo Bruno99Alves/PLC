@@ -1,19 +1,24 @@
-pushi 0
+pushn 6
 start
-pushi 5
+pushgp
+pushi 0
 pushi 2
-add
-pushi 7
+pushi 1
+pushi 3
 mul
-storeg 0
-pushg 0
-writei
+add
+add
+read
+atoi
+storen
+pushgp
+pushi 0
 pushi 2
-pushi 7
+pushi 1
+pushi 3
 mul
-pushi 5
 add
-storeg 0
-pushg 0
+add
+loadn
 writei
 stop
