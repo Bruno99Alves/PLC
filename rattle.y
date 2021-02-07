@@ -25,13 +25,13 @@ void createVar (char* id){
       variavel->id = id;
       variavel->posStack = gp;
       variavel->nArray = 0; 
-      if(gp>=MAX){            
+      if(gp>=MAX){     
+            printf("Memoria Máxima Excedida!");       
             erro = 1;
-        }
+      }
       v[gp]=variavel;
       gp++;
 }
-
 
 void createArray(char* id, int N, int M){
       Variable variavel = (Variable)malloc(sizeof(struct variable));
@@ -44,7 +44,8 @@ void createArray(char* id, int N, int M){
       }else{
             i = gp + (N*M);
       }
-      if(gp>=MAX){            
+      if(gp>=MAX){       
+            printf("Memoria Máxima Excedida!");         
             erro = 1;
       }
       while(gp<i){
@@ -62,7 +63,6 @@ int inArray(char* id){              //procura na lista de variaveis v
       }
       return 0;
 }
-
 
 int getPos(char* id){            //retorna posiçao na stack da var id
       int i;
@@ -156,7 +156,6 @@ Termo : Fator                                                   { asprintf(&$$,"
       | Expr '/' Fator                                          { if($3){ asprintf(&$$,"%s%sdiv\n",$1,$3); }else{printf("Erro: Divisao por 0"); $$=0; erro=1;} }                 
       | Expr '%' Fator                                          { asprintf(&$$,"%s%smod\n",$1,$3); }
       ;
-
          
 Fator : NUM                                                     { asprintf(&$$,"pushi %d\n",$1); }               
       | ID                                                      { if(inArray($1)==1){ asprintf(&$$,"pushg %d\n",getPos($1)); }else{printf("Erro: Variavel %s não existe",$1); $$=0; erro=1;} }
@@ -166,7 +165,6 @@ Fator : NUM                                                     { asprintf(&$$,"
       | FALSE                                                   { asprintf(&$$,"pushi %d\n",0); }
       | '(' Expr ')'                                            { asprintf(&$$,"%s",$2); }
       ;
-
 %%
 
 #include "lex.yy.c"
@@ -177,5 +175,6 @@ void yyerror(char *s){
 
 int main(){
     yyparse();
+    if(erro==1){ printf("Erro a compilar programa!"); }
     return(0);
 }
