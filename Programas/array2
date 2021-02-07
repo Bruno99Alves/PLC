@@ -1,0 +1,18 @@
+//Array Inverso 2
+//solucao para arays de tamanho N < 100
+
+var a[100]
+var i 
+var n
+
+input(n)
+
+for(i=0|i<n)do{
+    input(a[i])
+    i = i+1
+}
+
+for(i=n-1|i>=0)do{
+    output(a[i])
+    i = i-1
+}

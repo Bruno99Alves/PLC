@@ -1,0 +1,72 @@
+pushn 6
+start
+pushgp
+pushi 0
+pushi 2
+pushi 1
+pushi 3
+mul
+add
+add
+read
+atoi
+storen
+pushgp
+pushi 0
+pushi 1
+pushi 1
+pushi 3
+mul
+add
+add
+pushgp
+pushi 0
+pushi 2
+pushi 1
+pushi 3
+mul
+add
+add
+loadn
+pushi 2
+mul
+storen
+pushgp
+pushi 0
+pushi 2
+pushi 1
+pushi 3
+mul
+add
+add
+pushgp
+pushi 0
+pushi 2
+pushi 1
+pushi 3
+mul
+add
+add
+loadn
+pushgp
+pushi 0
+pushi 1
+pushi 1
+pushi 3
+mul
+add
+add
+loadn
+add
+storen
+pushgp
+pushi 0
+pushi 2
+pushi 1
+pushi 3
+mul
+add
+add
+loadn
+writei
+stop

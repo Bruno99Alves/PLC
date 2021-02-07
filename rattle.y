@@ -77,8 +77,6 @@ int getN(char* id){     //retorna N de a[N] ou a[N][M]
             if(strcmp(v[i]->id,id)==0){ return v[i]->nArray; }
       }
 }
-
-
 %}
 
 %union { int valN; char* valS; float valF; }

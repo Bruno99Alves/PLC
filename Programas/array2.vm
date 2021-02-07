@@ -1,0 +1,49 @@
+pushn 100
+pushi 0
+pushi 0
+start
+read
+atoi
+storeg 101
+pushi 0
+storeg 100
+for0:
+pushg 100
+pushg 101
+inf
+jz endfor0
+pushgp
+pushi 0
+pushg 100
+add
+read
+atoi
+storen
+pushg 100
+pushi 1
+add
+storeg 100
+jump for0
+endfor0:
+pushg 101
+pushi 1
+sub
+storeg 100
+for1:
+pushg 100
+pushi 0
+supeq
+jz endfor1
+pushgp
+pushi 0
+pushg 100
+add
+loadn
+writei
+pushg 100
+pushi 1
+sub
+storeg 100
+jump for1
+endfor1:
+stop
