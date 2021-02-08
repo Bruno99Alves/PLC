@@ -94,13 +94,13 @@ void createVar (char* id){
       variavel->id = id;
       variavel->posStack = gp;
       variavel->nArray = 0; 
-      if(gp>=MAX){            
+      if(gp>=MAX){     
+            printf("Memoria Máxima Excedida!");       
             erro = 1;
-        }
+      }
       v[gp]=variavel;
       gp++;
 }
-
 
 void createArray(char* id, int N, int M){
       Variable variavel = (Variable)malloc(sizeof(struct variable));
@@ -113,7 +113,8 @@ void createArray(char* id, int N, int M){
       }else{
             i = gp + (N*M);
       }
-      if(gp>=MAX){            
+      if(gp>=MAX){       
+            printf("Memoria Máxima Excedida!");         
             erro = 1;
       }
       while(gp<i){
@@ -131,7 +132,6 @@ int inArray(char* id){              //procura na lista de variaveis v
       }
       return 0;
 }
-
 
 int getPos(char* id){            //retorna posiçao na stack da var id
       int i;
@@ -623,7 +623,7 @@ static const yytype_uint8 yyrline[] =
      110,   113,   114,   115,   116,   117,   120,   121,   122,   125,
      126,   129,   130,   133,   134,   135,   138,   141,   142,   143,
      144,   145,   146,   149,   150,   151,   154,   155,   156,   157,
-     161,   162,   163,   164,   165,   166,   167
+     160,   161,   162,   163,   164,   165,   166
 };
 #endif
 
@@ -1724,43 +1724,43 @@ yyreduce:
     break;
 
   case 40:
-#line 161 "rattle.y"
+#line 160 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"pushi %d\n",(yyvsp[0].valN)); }
 #line 1730 "y.tab.c"
     break;
 
   case 41:
-#line 162 "rattle.y"
+#line 161 "rattle.y"
                                                                 { if(inArray((yyvsp[0].valS))==1){ asprintf(&(yyval.valS),"pushg %d\n",getPos((yyvsp[0].valS))); }else{printf("Erro: Variavel %s não existe",(yyvsp[0].valS)); (yyval.valS)=0; erro=1;} }
 #line 1736 "y.tab.c"
     break;
 
   case 42:
-#line 163 "rattle.y"
+#line 162 "rattle.y"
                                                                 { if(inArray((yyvsp[-3].valS))==1){ asprintf(&(yyval.valS),"pushgp\npushi %d\n%sadd\nloadn\n",getPos((yyvsp[-3].valS)),(yyvsp[-1].valS)); }else{printf("Erro: Array %s não existe",(yyvsp[-3].valS)); (yyval.valS)=0; erro=1;} }
 #line 1742 "y.tab.c"
     break;
 
   case 43:
-#line 164 "rattle.y"
+#line 163 "rattle.y"
                                                                 { if(inArray((yyvsp[-6].valS))==1){ asprintf(&(yyval.valS),"pushgp\npushi %d\n%s%spushi %d\nmul\nadd\nadd\nloadn\n",getPos((yyvsp[-6].valS)),(yyvsp[-4].valS),(yyvsp[-1].valS),getN((yyvsp[-6].valS))); }else{printf("Erro: Array %s não existe",(yyvsp[-6].valS)); (yyval.valS)=0; erro=1;} }
 #line 1748 "y.tab.c"
     break;
 
   case 44:
-#line 165 "rattle.y"
+#line 164 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"pushi %d\n",1); }
 #line 1754 "y.tab.c"
     break;
 
   case 45:
-#line 166 "rattle.y"
+#line 165 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"pushi %d\n",0); }
 #line 1760 "y.tab.c"
     break;
 
   case 46:
-#line 167 "rattle.y"
+#line 166 "rattle.y"
                                                                 { asprintf(&(yyval.valS),"%s",(yyvsp[-1].valS)); }
 #line 1766 "y.tab.c"
     break;
@@ -1998,7 +1998,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 170 "rattle.y"
+#line 168 "rattle.y"
 
 
 #include "lex.yy.c"
@@ -2009,5 +2009,6 @@ void yyerror(char *s){
 
 int main(){
     yyparse();
+    if(erro==1){ printf("Erro a compilar programa!"); }
     return(0);
 }

@@ -18,7 +18,6 @@
 (?i:OUTPUT)                         { return(OUTPUT); }
 [\=\(\)\{\}\;\+\-\*\/\|\%\[\]]      { return yytext[0]; }
 [a-zA-Z][0-9a-zA-Z]*                { yylval.valS=strdup(yytext); return(ID); }
--?[0-9]+(\.[0-9]+)?                 { yylval.valF=atof(yytext); return(FLOAT); }
 -?[0-9]+                            { yylval.valN=atoi(yytext); return(NUM); }
 \/\/.*\n                            { ; }
 [ \t\n]                             { ; }

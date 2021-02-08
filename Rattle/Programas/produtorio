@@ -1,0 +1,14 @@
+//Produtorio
+
+var n
+var prod
+var i
+
+input(n)
+input(prod)
+for(n=n-1|n>0)do{
+    input(i)
+    prod = prod*i
+    n = n-1
+}
+output(prod)
